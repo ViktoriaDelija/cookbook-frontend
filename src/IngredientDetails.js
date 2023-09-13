@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
 
-const IngredientDetails = () => {
+const IngredientDetails = ({ ingredients }) => {
   const API_URL = "http://localhost:8080/api/ingredients";
   const { ingId } = useParams();
-  const [ingredient, setIngredient] = useEffect(null);
-  console.log("this is the id: " + ingId);
+  const [ingredient, setIngredient] = useState({});
 
   useEffect(() => {
     const fetchIngredient = async () => {
@@ -23,30 +23,14 @@ const IngredientDetails = () => {
 
   return (
     <main>
-      <article>Hello</article>
+      <article>
+        <h2>{ingredient.name}</h2>
+        <p>{ingredient.description}</p>
+        <p>{ingredient.ingType}</p>
+        <p>{ingredient.price} €</p>
+      </article>
     </main>
   );
 };
 
 export default IngredientDetails;
-
-/*useEffect(() => {
-        const fetchEvent = async () => {
-            try {
-                const customHeaders = {Authorization: "Bearer " + context.token}
-                console.log(apiUrl + `/event/eventDetails/${idEvent}`)
-                const response = await axios.get(apiUrl + `/event/eventDetails/${idEvent}`, {headers: customHeaders});
-                setEvent(response.data);
-                checkIfAdmin(response.data);
-                checkIfFull(response.data);
-                checkIfJoined(response.data);
-
-
-
-                console.log(response.data);
-            } catch (error) {
-                console.log("Error fetching data: ", error);
-            }
-        }
-        fetchEvent();
-    }, [idEvent]);*/
