@@ -3,6 +3,7 @@ import IngredientHeader from "./IngredientHeader";
 import IngredientContent from "./IngredientContent";
 import "./index.css";
 import { useState } from "react";
+import axios from "axios";
 
 function Ingredients() {
   const API_URL = "http://localhost:8080/api/ingredients";
@@ -11,15 +12,15 @@ function Ingredients() {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await fetch(API_URL);
-        const ingredientsList = await response.json();
-        console.log("Ingredients: " + ingredientsList);
-        setIngredients(ingredientsList);
+        const response = await axios.get(API_URL);
+        setIngredients(response.data);
       } catch (err) {
+        console.log(err.response.data);
+        console.log(err.response.status);
         console.log(err.stack);
       }
     };
-    (async () => await fetchItems())();
+    fetchItems();
   }, []);
 
   return (
