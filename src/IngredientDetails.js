@@ -6,6 +6,7 @@ import { useState } from "react";
 const IngredientDetails = ({ handleDelete, ingredient, setIngredient }) => {
   const API_URL = "http://localhost:8080/api/ingredients";
   const { ingId } = useParams();
+  console.log(ingId);
 
   useEffect(() => {
     const fetchIngredient = async () => {
