@@ -71,15 +71,31 @@ const IngredientMain = () => {
   };
 
   const handleEdit = async (ingId) => {
+    const updatedIngredient = {
+      name: editIngredient.name,
+      description: editIngredient.description,
+      ingType: editIngredient.ingType,
+      price: editIngredient.price,
+    };
     try {
-      navigate(`/ingredients/edit/${ingId}`);
-      const response = await axios.put(API_URL + `/edit/${ingId}`);
+      const response = await axios.put(
+        API_URL + `/edit/${ingId}`,
+        updatedIngredient
+      );
+      setIngredients(
+        ingredients.map((ingredient) =>
+          ingredient.id === ingId ? { ...response.data } : ingredient
+        )
+      );
+      console.log(ingredient.id);
+      navigate("/ingredients");
     } catch (error) {
       console.log(error.response.data);
       console.log(error.response.status);
       console.log(error.stack);
     }
   };
+
   return (
     <Routes>
       <Route
@@ -118,6 +134,8 @@ const IngredientMain = () => {
           <EditIngredient
             editIngredient={editIngredient}
             setEditIngredient={setEditIngredient}
+            ingredients={ingredients}
+            handleEdit={handleEdit}
           />
         }
       />

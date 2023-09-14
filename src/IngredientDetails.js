@@ -33,9 +33,9 @@ const IngredientDetails = ({
         <button onClick={() => handleDelete(ingredient.id)}>
           Delete ingredient
         </button>
-        <button onClick={() => handleEdit(ingredient.id)}>
-          Edit ingredient
-        </button>
+        <Link to={`/ingredients/edit/${ingredient.id}`}>
+          <button>Edit ingredient</button>
+        </Link>
       </article>
     </main>
   );
