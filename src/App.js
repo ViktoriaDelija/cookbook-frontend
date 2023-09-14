@@ -11,7 +11,7 @@ function App() {
   const navigate = useNavigate();
   const API_URL = "http://localhost:8080/api/ingredients";
   const [ingredients, setIngredients] = useState([]);
-
+  const [ingredient, setIngredient] = useState({});
   const [newIngredient, setNewIngredient] = useState({
     name: "",
     description: "",
@@ -47,6 +47,21 @@ function App() {
     }
   };
 
+  const handleDelete = async (ingId) => {
+    try {
+      await axios.delete(API_URL + `/delete/${ingId}`);
+      const updatedIngredients = ingredients.filter(
+        (ingredient) => ingredient.id !== ingId
+      );
+      setIngredients(updatedIngredients);
+      navigate("/ingredients");
+    } catch (error) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.stack);
+    }
+  };
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -59,7 +74,16 @@ function App() {
           />
         }
       />
-      <Route path="/ingredients/:ingId" element={<IngredientDetails />} />
+      <Route
+        path="/ingredients/:ingId"
+        element={
+          <IngredientDetails
+            handleDelete={handleDelete}
+            ingredient={ingredient}
+            setIngredient={setIngredient}
+          />
+        }
+      />
       <Route
         path="/ingredients/new"
         element={
