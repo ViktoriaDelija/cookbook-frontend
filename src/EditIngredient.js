@@ -17,16 +17,20 @@ const EditIngredient = ({
   );
 
   useEffect(() => {
-    if (ingredient) {
-      setEditIngredient({
-        name: ingredient.name,
-        description: ingredient.description,
-        ingType: ingredient.ingType,
-        price: ingredient.price,
-      });
-      console.log("OPIS: " + ingredient.description);
-    }
-  }, [ingredient, setEditIngredient]);
+    const fetchIngredient = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/ingredients/${ingId}`
+        );
+        console.log("responseData :" + JSON.stringify(response));
+        setEditIngredient(response.data);
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    };
+    fetchIngredient();
+  }, [ingId]);
+
   return (
     <main>
       <h2>Edit Ingredient</h2>
