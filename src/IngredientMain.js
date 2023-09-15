@@ -7,6 +7,7 @@ import NewIngredient from "./NewIngredient";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import EditIngredient from "./EditIngredient";
 
 const IngredientMain = () => {
   const navigate = useNavigate();
@@ -14,6 +15,12 @@ const IngredientMain = () => {
   const [ingredients, setIngredients] = useState([]);
   const [ingredient, setIngredient] = useState({});
   const [newIngredient, setNewIngredient] = useState({
+    name: "",
+    description: "",
+    ingType: "",
+    price: "",
+  });
+  const [editIngredient, setEditIngredient] = useState({
     name: "",
     description: "",
     ingType: "",
@@ -62,6 +69,26 @@ const IngredientMain = () => {
       console.log(error.stack);
     }
   };
+
+  const handleEdit = async (ingId) => {
+    try {
+      const response = await axios.put(
+        API_URL + `/edit/${ingId}`,
+        editIngredient
+      );
+      setIngredients(
+        ingredients.map((ingredient) =>
+          ingredient.id === ingId ? { ...response.data } : ingredient
+        )
+      );
+      navigate(`/ingredients/${ingId}`);
+    } catch (error) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.stack);
+    }
+  };
+
   return (
     <Routes>
       <Route
@@ -80,6 +107,7 @@ const IngredientMain = () => {
             handleDelete={handleDelete}
             ingredient={ingredient}
             setIngredient={setIngredient}
+            handleEdit={handleEdit}
           />
         }
       />
@@ -91,6 +119,19 @@ const IngredientMain = () => {
             setNewIngredient={setNewIngredient}
             handleSubmit={handleSubmit}
           />
+        }
+      />
+      <Route
+        path="/edit/:ingId"
+        element={
+          ingredient ? (
+            <EditIngredient
+              editIngredient={editIngredient}
+              setEditIngredient={setEditIngredient}
+              ingredients={ingredients}
+              handleEdit={handleEdit}
+            />
+          ) : null
         }
       />
     </Routes>

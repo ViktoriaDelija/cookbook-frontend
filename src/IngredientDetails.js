@@ -3,17 +3,19 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
-const IngredientDetails = ({ handleDelete, ingredient, setIngredient }) => {
-  const API_URL = "http://localhost:8080/api/ingredients";
+const IngredientDetails = ({
+  handleDelete,
+  ingredient,
+  setIngredient,
+  handleEdit,
+}) => {
   const { ingId } = useParams();
-  console.log(ingId);
-
+  const API_URL = "http://localhost:8080/api/ingredients";
   useEffect(() => {
     const fetchIngredient = async () => {
       try {
         const response = await axios.get(API_URL + `/${ingId}`);
         setIngredient(response.data);
-        console.log(ingredient.id);
       } catch (error) {
         console.log(error.response.data);
         console.log(error.response.status);
@@ -21,7 +23,6 @@ const IngredientDetails = ({ handleDelete, ingredient, setIngredient }) => {
     };
     fetchIngredient();
   }, [ingId]);
-
   return (
     <main>
       <article>
@@ -32,6 +33,9 @@ const IngredientDetails = ({ handleDelete, ingredient, setIngredient }) => {
         <button onClick={() => handleDelete(ingredient.id)}>
           Delete ingredient
         </button>
+        <Link to={`/ingredients/edit/${ingredient.id}`}>
+          <button>Edit ingredient</button>
+        </Link>
       </article>
     </main>
   );
