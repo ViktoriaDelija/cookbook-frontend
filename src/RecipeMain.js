@@ -5,6 +5,7 @@ import Recipes from "./Recipes";
 import { useState } from "react";
 import RecipeDetails from "./RecipeDetails";
 import RecipeNew from "./RecipeNew";
+import RecipeEdit from "./RecipeEdit";
 
 const RecipeMain = () => {
   const navigate = useNavigate();
@@ -12,6 +13,11 @@ const RecipeMain = () => {
   const [recipes, setRecipes] = useState([]);
   const [recipe, setRecipe] = useState({});
   const [newRecipe, setNewRecipe] = useState({
+    name: "",
+    description: "",
+    instructions: "",
+  });
+  const [editRecipe, setEditRecipe] = useState({
     name: "",
     description: "",
     instructions: "",
@@ -45,6 +51,33 @@ const RecipeMain = () => {
     }
   };
 
+  const handleDelete = async (recId) => {
+    try {
+      await axios.delete(API_URL + `/delete/${recId}`);
+      const updatedRecipes = recipes.filter((recipe) => recipe.id !== recId);
+      setRecipes(updatedRecipes);
+      navigate("/recipes");
+    } catch (error) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.stack);
+    }
+  };
+
+  const handleEdit = async (recId) => {
+    try {
+      const response = await axios.put(API_URL + `/edit/${recId}`, editRecipe);
+      setRecipes(
+        recipes.map((recipe) => (recipe.id === recId ? response.data : recipe))
+      );
+      navigate(`/recipes/${recId}`);
+    } catch (error) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.stack);
+    }
+  };
+
   return (
     <Routes>
       <Route
@@ -53,7 +86,14 @@ const RecipeMain = () => {
       />
       <Route
         path="/:recId"
-        element={<RecipeDetails recipe={recipe} setRecipe={setRecipe} />}
+        element={
+          <RecipeDetails
+            recipe={recipe}
+            setRecipe={setRecipe}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+          />
+        }
       />
       <Route
         path="/new"
@@ -62,6 +102,17 @@ const RecipeMain = () => {
             newRecipe={newRecipe}
             setNewRecipe={setNewRecipe}
             handleSubmit={handleSubmit}
+          />
+        }
+      />
+      <Route
+        path="/edit/:recId"
+        element={
+          <RecipeEdit
+            recipes={recipes}
+            editRecipe={editRecipe}
+            setEditRecipe={setEditRecipe}
+            handleEdit={handleEdit}
           />
         }
       />
