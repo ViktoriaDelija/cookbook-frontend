@@ -5,7 +5,12 @@ const RecipeList = ({ recipes, setRecipes }) => {
   return (
     <article>
       {recipes.map((recipe) => (
-        <RecipeListItem key={recipe.id} recipe={recipe} />
+        <RecipeListItem
+          key={recipe.id}
+          recipe={recipe}
+          recipes={recipes}
+          setRecipes={setRecipes}
+        />
       ))}
     </article>
   );

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Recipes from "./Recipes";
 import { useState } from "react";
+import RecipeDetails from "./RecipeDetails";
 
 const RecipeMain = () => {
   const navigate = useNavigate();
@@ -29,6 +30,10 @@ const RecipeMain = () => {
       <Route
         path="/"
         element={<Recipes recipes={recipes} setRecipes={setRecipes} />}
+      />
+      <Route
+        path="/:recId"
+        element={<RecipeDetails recipe={recipe} setRecipe={setRecipe} />}
       />
     </Routes>
   );
