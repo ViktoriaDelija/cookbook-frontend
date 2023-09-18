@@ -27,9 +27,21 @@ const RecipeDetails = ({ recipe, setRecipe, handleDelete, handleEdit }) => {
         <h2>{recipe.name}</h2>
         <p>{recipe.description}</p>
         <p>{recipe.instructions}</p>
+        <div>
+          Ingredients:
+          {recipe.ingredientsInRecipe
+            ? recipe.ingredientsInRecipe.map((ingredient) => (
+                <div key={ingredient.id}>
+                  <Link to={`/ingredients/${ingredient.id}`}>
+                    {ingredient.name}
+                  </Link>
+                </div>
+              ))
+            : "No ingredients"}
+        </div>
         <button onClick={() => handleDelete(recipe.id)}>Delete recipe</button>
         <Link to={`/recipes/edit/${recId}`}>
-          <button>Edit ingredient</button>
+          <button>Edit recipe</button>
         </Link>
       </article>
     </main>

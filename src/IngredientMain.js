@@ -9,10 +9,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import EditIngredient from "./EditIngredient";
 
-const IngredientMain = () => {
+const IngredientMain = ({ ingredients, setIngredients }) => {
   const navigate = useNavigate();
   const API_URL = "http://localhost:8080/api/ingredients";
-  const [ingredients, setIngredients] = useState([]);
   const [ingredient, setIngredient] = useState({});
   const [newIngredient, setNewIngredient] = useState({
     name: "",
