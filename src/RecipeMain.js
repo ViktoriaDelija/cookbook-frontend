@@ -87,8 +87,16 @@ const RecipeMain = ({ ingredients, setIngredients }) => {
         ...newRecipe,
         ingredientIds: [...newRecipe.ingredientIds, checkedId],
       });
+    } else {
+      const updatedIngredients = newRecipe.ingredientIds.filter(
+        (id) => id !== checkedId
+      );
+      setNewRecipe({
+        ...newRecipe,
+        ingredientIds: updatedIngredients,
+      });
     }
-    console.log(newRecipe.ingredientIds);
+    console.log(newRecipe.ingredient);
   };
 
   return (
