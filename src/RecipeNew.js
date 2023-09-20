@@ -1,6 +1,12 @@
 import React from "react";
 
-const RecipeNew = ({ newRecipe, setNewRecipe, handleSubmit }) => {
+const RecipeNew = ({
+  newRecipe,
+  setNewRecipe,
+  handleSubmit,
+  ingredients,
+  handleCheck,
+}) => {
   return (
     <main>
       <h2>New recipe</h2>
@@ -30,6 +36,20 @@ const RecipeNew = ({ newRecipe, setNewRecipe, handleSubmit }) => {
             setNewRecipe({ ...newRecipe, instructions: e.target.value })
           }
         />
+        <ul>
+          Add ingredients:
+          {ingredients.map((ingredient) => (
+            <li key={ingredient.id}>
+              <input
+                type="checkbox"
+                onChange={() => handleCheck(ingredient.id)}
+                checked={ingredient.checked}
+              />
+              <label>{ingredient.name}</label>
+            </li>
+          ))}
+        </ul>
+
         <button type="submit">Submit</button>
       </form>
     </main>

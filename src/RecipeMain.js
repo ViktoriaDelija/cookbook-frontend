@@ -7,7 +7,7 @@ import RecipeDetails from "./RecipeDetails";
 import RecipeNew from "./RecipeNew";
 import RecipeEdit from "./RecipeEdit";
 
-const RecipeMain = () => {
+const RecipeMain = ({ ingredients, setIngredients }) => {
   const navigate = useNavigate();
   const API_URL = "http://localhost:8080/api/recipes";
   const [recipes, setRecipes] = useState([]);
@@ -16,6 +16,7 @@ const RecipeMain = () => {
     name: "",
     description: "",
     instructions: "",
+    ingredientIds: [],
   });
   const [editRecipe, setEditRecipe] = useState({
     name: "",
@@ -78,6 +79,26 @@ const RecipeMain = () => {
     }
   };
 
+  const handleCheck = (checkedId) => {
+    const isIngredientInList = newRecipe.ingredientIds.includes(checkedId);
+
+    if (!isIngredientInList) {
+      setNewRecipe({
+        ...newRecipe,
+        ingredientIds: [...newRecipe.ingredientIds, checkedId],
+      });
+    } else {
+      const updatedIngredients = newRecipe.ingredientIds.filter(
+        (id) => id !== checkedId
+      );
+      setNewRecipe({
+        ...newRecipe,
+        ingredientIds: updatedIngredients,
+      });
+    }
+    console.log(newRecipe.ingredient);
+  };
+
   return (
     <Routes>
       <Route
@@ -102,6 +123,8 @@ const RecipeMain = () => {
             newRecipe={newRecipe}
             setNewRecipe={setNewRecipe}
             handleSubmit={handleSubmit}
+            ingredients={ingredients}
+            handleCheck={handleCheck}
           />
         }
       />
