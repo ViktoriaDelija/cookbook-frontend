@@ -3,10 +3,13 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./Home";
 import IngredientMain from "./IngredientMain";
 import RecipeMain from "./RecipeMain";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Login from "./Login";
+import TokenContext from "./TokenContext";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
+
   return (
     <Routes>
       <Route
@@ -33,6 +36,7 @@ function App() {
           />
         }
       />
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 }
