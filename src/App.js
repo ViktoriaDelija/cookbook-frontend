@@ -5,37 +5,13 @@ import IngredientMain from "./IngredientMain";
 import RecipeMain from "./RecipeMain";
 import { useState, useEffect } from "react";
 import Login from "./Login";
-import TokenContext from "./TokenContext";
 
 function App() {
-  const [ingredients, setIngredients] = useState([]);
-
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <Home ingredients={ingredients} setIngredients={setIngredients} />
-        }
-      />
-      <Route
-        path="/ingredients/*"
-        element={
-          <IngredientMain
-            ingredients={ingredients}
-            setIngredients={setIngredients}
-          />
-        }
-      />
-      <Route
-        path="/recipes/*"
-        element={
-          <RecipeMain
-            ingredients={ingredients}
-            setIngredients={setIngredients}
-          />
-        }
-      />
+      <Route path="/" element={<Home />} />
+      <Route path="/ingredients/*" element={<IngredientMain />} />
+      <Route path="/recipes/*" element={<RecipeMain />} />
       <Route path="/login" element={<Login />} />
     </Routes>
   );

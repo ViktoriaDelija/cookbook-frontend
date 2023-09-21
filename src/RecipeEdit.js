@@ -2,8 +2,12 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import DataContext from "./context/DataContext";
 
-const RecipeEdit = ({ recipes, editRecipe, setEditRecipe, handleEdit }) => {
+const RecipeEdit = () => {
+  const { recipes, handleEditRecipe, editRecipe, setEditRecipe } =
+    useContext(DataContext);
   const { recId } = useParams();
   const recipe = recipes.find((recipe) => recipe.id.toString() === recId);
 
@@ -52,7 +56,7 @@ const RecipeEdit = ({ recipes, editRecipe, setEditRecipe, handleEdit }) => {
             setEditRecipe({ ...editRecipe, instructions: e.target.value })
           }
         />
-        <button type="submit" onClick={() => handleEdit(recipe.id)}>
+        <button type="submit" onClick={() => handleEditRecipe(recipe.id)}>
           Edit
         </button>
       </form>

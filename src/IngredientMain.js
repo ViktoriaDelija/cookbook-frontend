@@ -8,8 +8,11 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import EditIngredient from "./EditIngredient";
+import { useContext } from "react";
+import DataContext from "./context/DataContext";
 
-const IngredientMain = ({ ingredients, setIngredients }) => {
+const IngredientMain = () => {
+  const { ingredients, setIngredients } = useContext(DataContext);
   const navigate = useNavigate();
   const API_URL = "http://localhost:8080/api/ingredients";
   const [ingredient, setIngredient] = useState({});
@@ -90,15 +93,7 @@ const IngredientMain = ({ ingredients, setIngredients }) => {
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <Ingredients
-            ingredients={ingredients}
-            setIngredients={setIngredients}
-          />
-        }
-      />
+      <Route path="/" element={<Ingredients />} />
       <Route
         path="/:ingId"
         element={

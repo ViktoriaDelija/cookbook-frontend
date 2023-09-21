@@ -1,16 +1,19 @@
 import React from "react";
+import { useContext } from "react";
+import DataContext from "./context/DataContext";
 
-const RecipeNew = ({
-  newRecipe,
-  setNewRecipe,
-  handleSubmit,
-  ingredients,
-  handleCheck,
-}) => {
+const RecipeNew = () => {
+  const {
+    ingredients,
+    handleSubmitRecipe,
+    newRecipe,
+    setNewRecipe,
+    handleCheck,
+  } = useContext(DataContext);
   return (
     <main>
       <h2>New recipe</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmitRecipe}>
         <label>Name</label>
         <input
           type="text"
