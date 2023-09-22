@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useContext } from "react";
+import DataContext from "./context/DataContext";
 
-const IngredientDetails = ({
-  handleDelete,
-  ingredient,
-  setIngredient,
-  handleEdit,
-}) => {
+const IngredientDetails = () => {
   const { ingId } = useParams();
   const API_URL = "http://localhost:8080/api/ingredients";
+  const { ingredient, setIngredient, handleDeleteIngredient } =
+    useContext(DataContext);
   useEffect(() => {
     const fetchIngredient = async () => {
       try {
@@ -30,7 +28,7 @@ const IngredientDetails = ({
         <p>{ingredient.description}</p>
         <p>{ingredient.ingType}</p>
         <p>{ingredient.price} €</p>
-        <button onClick={() => handleDelete(ingredient.id)}>
+        <button onClick={() => handleDeleteIngredient(ingredient.id)}>
           Delete ingredient
         </button>
         <Link to={`/ingredients/edit/${ingredient.id}`}>

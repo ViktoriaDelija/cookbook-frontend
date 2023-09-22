@@ -1,12 +1,11 @@
 import React from "react";
-import { useRef, useState, useEffect, useContext } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
   const userRef = useRef();
-  const errRef = useRef();
   const API_URL = "http://localhost:8080/api/login";
 
   const [login, setLogin] = useState({

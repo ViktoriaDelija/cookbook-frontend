@@ -1,12 +1,14 @@
-import axios from "axios";
 import React from "react";
-import { useState } from "react";
+import { useContext } from "react";
+import DataContext from "./context/DataContext";
 
-const NewIngredient = ({ newIngredient, setNewIngredient, handleSubmit }) => {
+const NewIngredient = () => {
+  const { newIngredient, setNewIngredient, handleSubmitIngredient } =
+    useContext(DataContext);
   return (
     <main>
       <h2>New Ingredient</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmitIngredient}>
         <label>Name</label>
         <input
           type="text"

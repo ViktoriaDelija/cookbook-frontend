@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import IngredientHeader from "./IngredientHeader";
 import IngredientContent from "./IngredientContent";
 import "./index.css";

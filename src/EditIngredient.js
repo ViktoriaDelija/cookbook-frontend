@@ -1,15 +1,17 @@
 import React from "react";
 import { useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useContext } from "react";
+import DataContext from "./context/DataContext";
 
-const EditIngredient = ({
-  ingredients,
-  editIngredient,
-  setEditIngredient,
-  handleEdit,
-}) => {
+const EditIngredient = () => {
+  const {
+    editIngredient,
+    setEditIngredient,
+    handleEditIngredient,
+    ingredients,
+  } = useContext(DataContext);
   const { ingId } = useParams();
   console.log(ingId);
   const ingredient = ingredients.find(
@@ -81,7 +83,7 @@ const EditIngredient = ({
           }
         />
       </form>
-      <button type="submit" onClick={() => handleEdit(ingredient.id)}>
+      <button type="submit" onClick={() => handleEditIngredient(ingredient.id)}>
         Edit
       </button>
     </main>

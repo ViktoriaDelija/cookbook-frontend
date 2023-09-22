@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const DataContext = createContext({});
 export const DataProvider = ({ children }) => {
   const [ingredients, setIngredients] = useState([]);
+  const [ingredient, setIngredient] = useState({});
   const [recipes, setRecipes] = useState([]);
   const [recipe, setRecipe] = useState({});
   const [newRecipe, setNewRecipe] = useState({
@@ -19,8 +20,21 @@ export const DataProvider = ({ children }) => {
     description: "",
     instructions: "",
   });
+  const [newIngredient, setNewIngredient] = useState({
+    name: "",
+    description: "",
+    ingType: "",
+    price: "",
+  });
+  const [editIngredient, setEditIngredient] = useState({
+    name: "",
+    description: "",
+    ingType: "",
+    price: "",
+  });
   const navigate = useNavigate();
   const API_URL_RECIPE = "http://localhost:8080/api/recipes";
+  const API_URL_INGREDIENT = "http://localhost:8080/api/ingredients";
 
   const handleSubmitRecipe = async (e) => {
     e.preventDefault();
@@ -99,6 +113,71 @@ export const DataProvider = ({ children }) => {
     fetchRecipes();
   }, []);
 
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await axios.get(API_URL_INGREDIENT);
+        setIngredients(response.data);
+      } catch (error) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.stack);
+      }
+    };
+    fetchItems();
+  }, []);
+
+  const handleSubmitIngredient = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        API_URL_INGREDIENT + "/new",
+        newIngredient
+      );
+      const allIngredients = [...ingredients, response.data];
+      setIngredients(allIngredients);
+      navigate("/ingredients");
+    } catch (error) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.stack);
+    }
+  };
+
+  const handleDeleteIngredient = async (ingId) => {
+    try {
+      await axios.delete(API_URL_INGREDIENT + `/delete/${ingId}`);
+      const updatedIngredients = ingredients.filter(
+        (ingredient) => ingredient.id !== ingId
+      );
+      setIngredients(updatedIngredients);
+      navigate("/ingredients");
+    } catch (error) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.stack);
+    }
+  };
+
+  const handleEditIngredient = async (ingId) => {
+    try {
+      const response = await axios.put(
+        API_URL_INGREDIENT + `/edit/${ingId}`,
+        editIngredient
+      );
+      setIngredients(
+        ingredients.map((ingredient) =>
+          ingredient.id === ingId ? { ...response.data } : ingredient
+        )
+      );
+      navigate(`/ingredients/${ingId}`);
+    } catch (error) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.stack);
+    }
+  };
+
   return (
     <DataContext.Provider
       value={{
@@ -116,6 +195,15 @@ export const DataProvider = ({ children }) => {
         setRecipe,
         newRecipe,
         setNewRecipe,
+        ingredient,
+        setIngredient,
+        newIngredient,
+        setNewIngredient,
+        editIngredient,
+        setEditIngredient,
+        handleDeleteIngredient,
+        handleSubmitIngredient,
+        handleEditIngredient,
       }}
     >
       {children}
