@@ -1,12 +1,14 @@
-import axios from "axios";
 import React from "react";
-import { useState } from "react";
+import { useContext } from "react";
+import IngredientContext from "../../context/IngredientContext";
 
-const NewIngredient = ({ newIngredient, setNewIngredient, handleSubmit }) => {
+const IngredientNew = () => {
+  const { newIngredient, setNewIngredient, handleSubmitIngredient } =
+    useContext(IngredientContext);
   return (
     <main>
       <h2>New Ingredient</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmitIngredient}>
         <label>Name</label>
         <input
           type="text"
@@ -49,4 +51,4 @@ const NewIngredient = ({ newIngredient, setNewIngredient, handleSubmit }) => {
   );
 };
 
-export default NewIngredient;
+export default IngredientNew;
