@@ -14,7 +14,7 @@ const Login = () => {
   });
 
   const handleSubmit = async (e) => {
-    e.prevent.default();
+    e.preventDefault();
 
     try {
       const response = await axios.post(API_URL, login);
@@ -47,7 +47,7 @@ const Login = () => {
           onChange={(e) => setLogin({ ...login, password: e.target.value })}
           required
         />
-        <button>Login</button>
+        <button type="submit">Login</button>
       </form>
     </section>
   );
