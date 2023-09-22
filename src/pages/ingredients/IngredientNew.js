@@ -1,10 +1,10 @@
 import React from "react";
 import { useContext } from "react";
-import DataContext from "../../context/DataContext";
+import IngredientContext from "../../context/IngredientContext";
 
 const IngredientNew = () => {
   const { newIngredient, setNewIngredient, handleSubmitIngredient } =
-    useContext(DataContext);
+    useContext(IngredientContext);
   return (
     <main>
       <h2>New Ingredient</h2>

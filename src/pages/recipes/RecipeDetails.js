@@ -4,10 +4,10 @@ import { useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import DataContext from "../../context/DataContext";
+import RecipeContext from "../../context/RecipeContext";
 
 const RecipeDetails = () => {
-  const { handleDeleteRecipe, recipe, setRecipe } = useContext(DataContext);
+  const { handleDeleteRecipe, recipe, setRecipe } = useContext(RecipeContext);
   const { recId } = useParams();
   const API_URL = "http://localhost:8080/api/recipes";
 

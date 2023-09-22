@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
-import DataContext from "../../context/DataContext";
+import IngredientContext from "../../context/IngredientContext";
 
 const IngredientDetails = () => {
   const { ingId } = useParams();
   const API_URL = "http://localhost:8080/api/ingredients";
   const { ingredient, setIngredient, handleDeleteIngredient } =
-    useContext(DataContext);
+    useContext(IngredientContext);
   useEffect(() => {
     const fetchIngredient = async () => {
       try {

@@ -4,14 +4,12 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
 import DataContext from "../../context/DataContext";
+import IngredientContext from "../../context/IngredientContext";
 
 const IngredientEdit = () => {
-  const {
-    editIngredient,
-    setEditIngredient,
-    handleEditIngredient,
-    ingredients,
-  } = useContext(DataContext);
+  const { editIngredient, setEditIngredient, handleEditIngredient } =
+    useContext(IngredientContext);
+  const { ingredients, setIngredients } = useContext(DataContext);
   const { ingId } = useParams();
   console.log(ingId);
   const ingredient = ingredients.find(

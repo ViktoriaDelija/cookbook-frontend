@@ -1,15 +1,12 @@
 import React from "react";
 import { useContext } from "react";
 import DataContext from "../../context/DataContext";
+import RecipeContext from "../../context/RecipeContext";
 
 const RecipeNew = () => {
-  const {
-    ingredients,
-    handleSubmitRecipe,
-    newRecipe,
-    setNewRecipe,
-    handleCheck,
-  } = useContext(DataContext);
+  const { ingredients } = useContext(DataContext);
+  const { handleSubmitRecipe, newRecipe, setNewRecipe, handleCheck } =
+    useContext(RecipeContext);
   return (
     <main>
       <h2>New recipe</h2>

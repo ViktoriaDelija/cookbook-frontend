@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { useContext } from "react";
-import DataContext from "../../context/DataContext";
+import RecipeContext from "../../context/RecipeContext";
 
 const RecipeEdit = () => {
   const { recipes, handleEditRecipe, editRecipe, setEditRecipe } =
-    useContext(DataContext);
+    useContext(RecipeContext);
   const { recId } = useParams();
   const recipe = recipes.find((recipe) => recipe.id.toString() === recId);
 
