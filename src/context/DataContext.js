@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 const DataContext = createContext({});
 export const DataProvider = ({ children }) => {
   const [ingredients, setIngredients] = useState([]);
+  const [token, setToken] = useState("");
 
   const navigate = useNavigate();
 
@@ -14,6 +15,8 @@ export const DataProvider = ({ children }) => {
         ingredients,
         setIngredients,
         navigate,
+        token,
+        setToken,
       }}
     >
       {children}

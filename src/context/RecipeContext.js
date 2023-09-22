@@ -6,7 +6,7 @@ import DataContext from "./DataContext";
 
 const RecipeContext = createContext({});
 export const RecipeProvider = ({ children }) => {
-  const { navigate } = useContext(DataContext);
+  const { navigate, token } = useContext(DataContext);
   const API_URL_RECIPE = "http://localhost:8080/api/recipes";
   const [recipes, setRecipes] = useState([]);
   const [recipe, setRecipe] = useState({});
@@ -21,11 +21,14 @@ export const RecipeProvider = ({ children }) => {
     description: "",
     instructions: "",
   });
+  const customHeaders = { Authorization: "Bearer " + token };
 
   const handleSubmitRecipe = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(API_URL_RECIPE + `/new`, newRecipe);
+      const response = await axios.post(API_URL_RECIPE + `/new`, newRecipe, {
+        headers: customHeaders,
+      });
       const allRecipes = [...recipes, response.data];
       setRecipes(allRecipes);
       navigate("/recipes");
@@ -38,7 +41,9 @@ export const RecipeProvider = ({ children }) => {
 
   const handleDeleteRecipe = async (recId) => {
     try {
-      await axios.delete(API_URL_RECIPE + `/delete/${recId}`);
+      await axios.delete(API_URL_RECIPE + `/delete/${recId}`, {
+        headers: customHeaders,
+      });
       const updatedRecipes = recipes.filter((recipe) => recipe.id !== recId);
       setRecipes(updatedRecipes);
       navigate("/recipes");
@@ -53,7 +58,8 @@ export const RecipeProvider = ({ children }) => {
     try {
       const response = await axios.put(
         API_URL_RECIPE + `/edit/${recId}`,
-        editRecipe
+        editRecipe,
+        { headers: customHeaders }
       );
       setRecipes(
         recipes.map((recipe) => (recipe.id === recId ? response.data : recipe))

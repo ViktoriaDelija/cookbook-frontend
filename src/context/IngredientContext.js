@@ -6,7 +6,8 @@ import axios from "axios";
 const IngredientContext = createContext({});
 export const IngredientProvider = ({ children }) => {
   const API_URL_INGREDIENT = "http://localhost:8080/api/ingredients";
-  const { ingredients, setIngredients, navigate } = useContext(DataContext);
+  const { ingredients, setIngredients, navigate, token } =
+    useContext(DataContext);
 
   const [ingredient, setIngredient] = useState({});
   const [newIngredient, setNewIngredient] = useState({
@@ -21,6 +22,7 @@ export const IngredientProvider = ({ children }) => {
     ingType: "",
     price: "",
   });
+  const customHeaders = { Authorization: "Bearer " + token };
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -41,7 +43,8 @@ export const IngredientProvider = ({ children }) => {
     try {
       const response = await axios.post(
         API_URL_INGREDIENT + "/new",
-        newIngredient
+        newIngredient,
+        { headers: customHeaders }
       );
       const allIngredients = [...ingredients, response.data];
       setIngredients(allIngredients);
@@ -55,7 +58,9 @@ export const IngredientProvider = ({ children }) => {
 
   const handleDeleteIngredient = async (ingId) => {
     try {
-      await axios.delete(API_URL_INGREDIENT + `/delete/${ingId}`);
+      await axios.delete(API_URL_INGREDIENT + `/delete/${ingId}`, {
+        headers: customHeaders,
+      });
       const updatedIngredients = ingredients.filter(
         (ingredient) => ingredient.id !== ingId
       );
@@ -72,7 +77,8 @@ export const IngredientProvider = ({ children }) => {
     try {
       const response = await axios.put(
         API_URL_INGREDIENT + `/edit/${ingId}`,
-        editIngredient
+        editIngredient,
+        { headers: customHeaders }
       );
       setIngredients(
         ingredients.map((ingredient) =>

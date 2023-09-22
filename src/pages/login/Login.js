@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import DataContext from "../../context/DataContext";
 
 const Login = () => {
-  const navigate = useNavigate();
+  const { navigate, token, setToken } = useContext(DataContext);
   const userRef = useRef();
   const API_URL = "http://localhost:8080/api/login";
 
@@ -18,7 +19,8 @@ const Login = () => {
 
     try {
       const response = await axios.post(API_URL, login);
-      console.log(response.data);
+      setToken(response.data.token);
+      console.log(token);
       navigate("/");
     } catch (error) {
       console.log(error);
