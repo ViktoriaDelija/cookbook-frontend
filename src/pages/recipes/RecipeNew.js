@@ -7,6 +7,7 @@ const RecipeNew = () => {
   const { ingredients } = useContext(DataContext);
   const { handleSubmitRecipe, newRecipe, setNewRecipe, handleCheck } =
     useContext(RecipeContext);
+
   return (
     <main>
       <h2>New recipe</h2>
