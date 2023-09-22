@@ -2,7 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import DataContext from "../../context/DataContext";
 
-const NewIngredient = () => {
+const IngredientNew = () => {
   const { newIngredient, setNewIngredient, handleSubmitIngredient } =
     useContext(DataContext);
   return (
@@ -51,4 +51,4 @@ const NewIngredient = () => {
   );
 };
 
-export default NewIngredient;
+export default IngredientNew;

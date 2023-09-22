@@ -5,7 +5,7 @@ import axios from "axios";
 import { useContext } from "react";
 import DataContext from "../../context/DataContext";
 
-const EditIngredient = () => {
+const IngredientEdit = () => {
   const {
     editIngredient,
     setEditIngredient,
@@ -90,4 +90,4 @@ const EditIngredient = () => {
   );
 };
 
-export default EditIngredient;
+export default IngredientEdit;
