@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
-import DataContext from "./context/DataContext";
+import DataContext from "../../context/DataContext";
 
 const IngredientDetails = () => {
   const { ingId } = useParams();

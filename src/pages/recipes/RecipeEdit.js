@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { useContext } from "react";
-import DataContext from "./context/DataContext";
+import DataContext from "../../context/DataContext";
 
 const RecipeEdit = () => {
   const { recipes, handleEditRecipe, editRecipe, setEditRecipe } =

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
-import DataContext from "./context/DataContext";
+import DataContext from "../../context/DataContext";
 
 const EditIngredient = () => {
   const {

@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Recipes from "./Recipes";
-import RecipeDetails from "./RecipeDetails";
-import RecipeNew from "./RecipeNew";
-import RecipeEdit from "./RecipeEdit";
+import Recipes from "../../pages/recipes/Recipes";
+import RecipeDetails from "../../pages/recipes/RecipeDetails";
+import RecipeNew from "../../pages/recipes/RecipeNew";
+import RecipeEdit from "../../pages/recipes/RecipeEdit";
 
 const RecipeMain = () => {
   return (

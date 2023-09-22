@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import DataContext from "./context/DataContext";
+import DataContext from "../../context/DataContext";
 
 const RecipeDetails = () => {
   const { handleDeleteRecipe, recipe, setRecipe } = useContext(DataContext);

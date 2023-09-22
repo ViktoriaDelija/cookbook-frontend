@@ -1,10 +1,10 @@
 import React from "react";
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
-import Ingredients from "./Ingredients";
-import IngredientDetails from "./IngredientDetails";
-import NewIngredient from "./NewIngredient";
-import EditIngredient from "./EditIngredient";
+import Ingredients from "../../pages/ingredients/Ingredients";
+import IngredientDetails from "../../pages/ingredients/IngredientDetails";
+import NewIngredient from "../../pages/ingredients/NewIngredient";
+import EditIngredient from "../../pages/ingredients/EditIngredient";
 
 const IngredientMain = () => {
   return (

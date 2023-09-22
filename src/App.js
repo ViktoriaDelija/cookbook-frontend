@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./Home";
-import IngredientMain from "./IngredientMain";
-import RecipeMain from "./RecipeMain";
-import Login from "./Login";
+import IngredientMain from "./context/routes-manager/IngredientMain";
+import RecipeMain from "./context/routes-manager/RecipeMain";
+import Home from "./pages/main/Home";
+import Login from "./pages/login/Login";
 
 function App() {
   return (
