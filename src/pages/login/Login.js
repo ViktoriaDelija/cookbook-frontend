@@ -28,6 +28,11 @@ const Login = () => {
     }
   };
 
+  const handleLogout = async (e) => {
+    setToken(null);
+    navigate("/");
+  };
+
   return (
     <>
       {!token ? (
@@ -60,7 +65,10 @@ const Login = () => {
           </p>
         </section>
       ) : (
-        <p>You are logged in</p>
+        <>
+          <p>You are logged in</p>
+          <button onClick={handleLogout}>Log out</button>
+        </>
       )}
     </>
   );
