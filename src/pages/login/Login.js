@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useRef, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DataContext from "../../context/DataContext";
 
 const Login = () => {
@@ -54,6 +54,10 @@ const Login = () => {
             />
             <button type="submit">Login</button>
           </form>
+          <p>
+            Don't have an account?
+            <Link to={"/signup"}>Sign up</Link>
+          </p>
         </section>
       ) : (
         <p>You are logged in</p>
