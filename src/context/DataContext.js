@@ -6,6 +6,7 @@ const DataContext = createContext({});
 export const DataProvider = ({ children }) => {
   const [ingredients, setIngredients] = useState([]);
   const [token, setToken] = useState("");
+  const [role, setRole] = useState("");
 
   const navigate = useNavigate();
 
@@ -17,6 +18,8 @@ export const DataProvider = ({ children }) => {
         navigate,
         token,
         setToken,
+        role,
+        setRole,
       }}
     >
       {children}

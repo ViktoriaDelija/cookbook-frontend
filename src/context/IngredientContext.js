@@ -22,6 +22,7 @@ export const IngredientProvider = ({ children }) => {
     ingType: "",
     price: "",
   });
+
   const customHeaders = { Authorization: "Bearer " + token };
 
   useEffect(() => {
