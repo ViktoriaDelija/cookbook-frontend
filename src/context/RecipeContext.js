@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DataContext from "./DataContext";
+import jwtDecode from "jwt-decode";
 
 const RecipeContext = createContext({});
 export const RecipeProvider = ({ children }) => {
@@ -14,6 +15,7 @@ export const RecipeProvider = ({ children }) => {
     name: "",
     description: "",
     instructions: "",
+    authorEmail: "",
     ingredientIds: [],
   });
   const [editRecipe, setEditRecipe] = useState({
@@ -22,6 +24,14 @@ export const RecipeProvider = ({ children }) => {
     instructions: "",
   });
   const customHeaders = { Authorization: "Bearer " + token };
+
+  useEffect(() => {
+    if (token) {
+      var decoded = jwtDecode(token);
+      setNewRecipe({ ...newRecipe, authorEmail: decoded.sub });
+      console.log(newRecipe.authorEmail);
+    }
+  }, []);
 
   const handleSubmitRecipe = async (e) => {
     e.preventDefault();
